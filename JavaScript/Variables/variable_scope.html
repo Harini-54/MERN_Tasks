@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            // Local vs Global with var, let, and const
+            var globalvar = 9; // Global variable
+
+            function outer() {
+                var localvar = 7; // Local variable to outer function
+                const constVar = 11; // Block-scoped constant
+
+                function inner() {
+                    var innervar = 8; // Local variable to inner function
+                    let letVar = 10;  // Block-scoped variable with let
+                    console.log("The values inside the inner function:");
+                    console.log("Inner variable: " + innervar); // Accessible
+                    console.log("Global variable: " + globalvar); // Accessible
+                    console.log("Local variable: " + localvar); // Accessible
+                    console.log("letVar: " + letVar); // Accessible
+                    console.log("constVar: " + constVar); // Accessible
+                }
+
+                console.log("The values inside the outer function but outside the inner function:");
+                console.log("Inner variable is not accessed as it is a local variable and valid only inside the inner function scope");
+                console.log("Global variable: " + globalvar); // Accessible
+                console.log("Local variable: " + localvar); // Accessible
+                console.log("letVar is not accessible here as it is block-scoped");
+                //console.log("letVar: " + letVar); // Not Accessible as it is block-scoped
+                console.log("constVar: " + constVar); // Accessible
+                inner();
+            }
+
+            outer();
+
+            console.log("Outside the functions:");
+            console.log("Global variable: " + globalvar); // Accessible
+            console.log("localvar, letvar, constvar is not accesible outside the functions")
+            // console.log("Local variable: " + localvar); // Error: localvar is not defined
+            // console.log("letVar: " + letVar); // Error: Not Accessible as it is block-scoped
+            // console.log("constVar: " + constVar); // Error: Not Accessible as it is block-scoped
+        </script>
+    </body>
+</html>
+
+<!--
+constvar:
+Declared with const inside the outer function, making it local to outer and accessible within outer and any functions nested within it. It cannot be reassigned.
+letvar:
+Declared with let inside the inner function, making it local to inner and accessible only within inner.
+---output---
+The values inside the outer function but outside the inner function:
+variable_scope.html:25 Inner variable is not accessed as it is a local variable and valid only inside the inner function scope
+variable_scope.html:26 Global variable: 9
+variable_scope.html:27 Local variable: 7
+variable_scope.html:28 letVar is not accessible here as it is block-scoped
+variable_scope.html:30 constVar: 11
+variable_scope.html:16 The values inside the inner function:
+variable_scope.html:17 Inner variable: 8
+variable_scope.html:18 Global variable: 9
+variable_scope.html:19 Local variable: 7
+variable_scope.html:20 letVar: 10
+variable_scope.html:21 constVar: 11
+variable_scope.html:36 Outside the functions:
+variable_scope.html:37 Global variable: 9
+variable_scope.html:38 localvar, letvar, constvar is not accesible outside the functions
+-->
